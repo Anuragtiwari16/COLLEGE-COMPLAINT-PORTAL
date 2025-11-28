@@ -1,0 +1,128 @@
+<index class="htmi"></index><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint - College Complaint Portal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #eef2ff;
+            display: flex;
+            justify-content: center;
+            padding-top: 40px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 520px;
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4b4fda;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #c7c7c7;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .input-group textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: #4b4fda;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #3c3fba;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Submit Complaint</h2>
+
+        <form action="#" method="post">
+
+            <div class="input-group">
+                <label>Your Name</label>
+                <input type="text" name="studentName" placeholder="Enter your name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Department</label>
+                <select name="department" required>
+                    <option value="" disabled selected>Select department</option>
+                    <option>Computer Science</option>
+                    <option>IT</option>
+                    <option>Electronics</option>
+                    <option>Mechanical</option>
+                    <option>Civil</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Complaint Type</label>
+                <select name="issueType" required>
+                    <option value="" disabled selected>Select issue type</option>
+                    <option>Hostel</option>
+                    <option>Wi-Fi</option>
+                    <option>Classroom</option>
+                    <option>Library</option>
+                    <option>Academic</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Complaint Details</label>
+                <textarea name="details" placeholder="Describe your issue..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit Complaint</button>
+
+        </form>
+    </div>
+</body>
+</html>

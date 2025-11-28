@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | College Complaint Portal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.4s ease;
+
+            /* Light mode defaults */
+            --text-main: #333;
+            --text-heading: #374151;
+            --btn-text: #ffffff;
+            --toggle-text: #333;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --form-bg: rgba(255, 255, 255, 0.95);
+            --btn-bg: #7ca5a3;
+            --btn-bg-hover: #6c9693;
+        }
+
+        /* Dark mode (full page) */
+        body.dark-mode {
+            background: #0f172a !important;
+            --text-main: #e5e7eb;
+            --text-heading: #cbd5f5;
+            --btn-text: #e6fffa;
+            --toggle-text: #e5e7eb;
+            --card-bg: rgba(15, 23, 42, 0.92);
+            --form-bg: rgba(15, 23, 42, 0.98);
+            --btn-bg: #38b2ac;
+            --btn-bg-hover: #319795;
+        }
+
+        /* Top controls */
+        .top-controls {
+            width: 90%;
+            max-width: 450px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .mode-toggle,
+        .theme-select {
+            padding: 8px 14px;
+            font-size: 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,0,0,0.15);
+            cursor: pointer;
+            background: rgba(255,255,255,0.9);
+            color: var(--toggle-text);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+        }
+
+        .mode-toggle:hover,
+        .theme-select:hover {
+            transform: translateY(-1px);
+        }
+
+        body.dark-mode .mode-toggle,
+        body.dark-mode .theme-select {
+            background: rgba(15,23,42,0.9);
+            border-color: rgba(148,163,184,0.6);
+        }
+
+        /* Login card */
+        .login-card {
+            width: 90%;
+            max-width: 450px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            background: var(--card-bg);
+            padding: 28px 26px 24px;
+            border-radius: 16px;
+            box-shadow: 0 12px 26px rgba(0,0,0,0.18);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.7s ease;
+        }
+
+        .login-card h1 {
+            margin: 0 0 6px;
+            font-size: 24px;
+            text-align: center;
+            color: var(--text-heading);
+        }
+
+        .login-card p.subtitle {
+            margin: 0 0 18px;
+            font-size: 13px;
+            text-align: center;
+            color: var(--text-main);
+            opacity: 0.85;
+        }
+
+        form {
+            background: var(--form-bg);
+            border-radius: 12px;
+            padding: 16px 16px 14px;
+        }
+
+        .field {
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        label {
+            font-size: 13px;
+            color: var(--text-heading);
+        }
+
+        input, select {
+            padding: 9px 10px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 13px;
+            outline: none;
+            background: rgba(255,255,255,0.95);
+        }
+
+        body.dark-mode input,
+        body.dark-mode select {
+            background: rgba(15,23,42,0.98);
+            border-color: #475569;
+            color: var(--text-main);
+        }
+
+        .remember-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 6px 0 12px;
+            font-size: 12px;
+            color: var(--text-main);
+        }
+
+        .remember-row label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin: 0;
+        }
+
+        .btn-primary {
+            width: 100%;
+            margin-top: 4px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: none;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+            transition: 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--btn-bg-hover);
+            transform: translateY(-1px);
+        }
+
+        .extra-links {
+            margin-top: 12px;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-main);
+        }
+
+        .extra-links a {
+            color: var(--text-heading);
+            text-decoration: none;
+        }
+
+        .extra-links a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            margin-top: 6px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .back-home a {
+            color: var(--text-heading);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Controls: Theme + Dark/Light -->
+    <div class="top-controls">
+        <select id="themeSelect" class="theme-select">
+            <option value="teal">Teal</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="purple">Purple</option>
+        </select>
+        <button id="modeToggle" class="mode-toggle">🌙 Dark Mode</button>
+    </div>
+
+    <!-- Login Box -->
+    <div class="login-card">
+        <h1>Login</h1>
+        <p class="subtitle">Access your college complaint portal account.</p>
+
+        <form>
+            <div class="field">
+                <label for="username">Email / Enrollment No.</label>
+                <input type="text" id="username" placeholder="Enter your email or ID" required />
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required />
+            </div>
+
+            <div class="field">
+                <label for="role">Login as</label>
+                <select id="role">
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <div class="remember-row">
+                <label>
+                    <input type="checkbox" style="width:14px;height:14px;" />
+                    Remember me
+                </label>
+                <a href="#" style="text-decoration:none;">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn-primary">Login</button>
+        </form>
+
+        <div class="extra-links">
+            <span>New user?</span>
+            <a href="register.html">Create an account</a>
+        </div>
+
+        <div class="back-home">
+            <a href="index.html">← Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        const toggleBtn   = document.getElementById("modeToggle");
+        const themeSelect = document.getElementById("themeSelect");
+
+        const themes = {
+            teal:   ["#d9e6e2", "#c4ccd3"],
+            green:  ["#e1f3df", "#c9e4c6"],
+            blue:   ["#dce9ff", "#c8dbf0"],
+            purple: ["#efe4ff", "#dbc9ff"]
+        };
+
+        function applyTheme(name) {
+            const [bg1, bg2] = themes[name] || themes.teal;
+            if (!document.body.classList.contains("dark-mode")) {
+                document.body.style.background = `linear-gradient(135deg, ${bg1}, ${bg2})`;
+            }
+            localStorage.setItem("pageTheme", name);
+        }
+
+        function updateModeButton() {
+            const isDark = document.body.classList.contains("dark-mode");
+            toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+            themeSelect.disabled = isDark;
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("dark-mode");
+            const isDark = document.body.classList.contains("dark-mode");
+            localStorage.setItem("themeMode", isDark ? "dark" : "light");
+
+            if (isDark) {
+                document.body.style.background = "#0f172a";
+            } else {
+                applyTheme(themeSelect.value);
+            }
+
+            updateModeButton();
+        }
+
+        toggleBtn.addEventListener("click", toggleMode);
+        themeSelect.addEventListener("change", () => applyTheme(themeSelect.value));
+
+        // Initial load
+        const savedTheme = localStorage.getItem("pageTheme") || "teal";
+        const savedMode  = localStorage.getItem("themeMode");
+
+        themeSelect.value = savedTheme;
+
+        if (savedMode === "dark") {
+            document.body.classList.add("dark-mode");
+            document.body.style.background = "#0f172a";
+        } else {
+            applyTheme(savedTheme);
+        }
+
+        updateModeButton();
+    </script>
+</body>
+</html>

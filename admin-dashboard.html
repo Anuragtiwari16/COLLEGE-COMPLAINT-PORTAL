@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - College Complaint Portal</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f0f4ff;
+        }
+
+        
+        .navbar {
+            background: #4b4fda;
+            padding: 15px 25px;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout-btn {
+            background: white;
+            color: #4b4fda;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #e2e2ff;
+        }
+
+       
+        .container {
+            padding: 25px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+       
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #4b4fda;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f7f7ff;
+        }
+
+        
+        .status-btn {
+            border: none;
+            padding: 7px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+        }
+
+        .pending { background: #f0ad4e; }
+        .in-progress { background: #0275d8; }
+        .resolved { background: #5cb85c; }
+
+        .status-btn:hover {
+            opacity: 0.85;
+        }
+    </style>
+</head>
+
+<body>
+
+  
+    <div class="navbar">
+        Admin Dashboard
+        <a href="login.html" class="logout-btn">Logout</a>
+    </div>
+
+    <div class="container">
+        <h2>All Complaints</h2>
+
+        <table>
+            <tr>
+                <th>Complaint ID</th>
+                <th>Student Name</th>
+                <th>Department</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Update</th>
+            </tr>
+
+            
+            <tr>
+                <td>#101</td>
+                <td>Rohan Sharma</td>
+                <td>Computer Science</td>
+                <td>Wi-Fi</td>
+                <td>Wi-Fi not working since morning.</td>
+                <td><span class="pending">Pending</span></td>
+                <td>
+                    <button class="status-btn pending">Pending</button>
+                    <button class="status-btn in-progress">In Progress</button>
+                    <button class="status-btn resolved">Resolved</button>
+                </td>
+            </tr>
+
+           
+            <tr>
+                <td>#102</td>
+                <td>Anjali Verma</td>
+                <td>Mechanical</td>
+                <td>Hostel</td>
+                <td>Water leakage in bathroom.</td>
+                <td><span class="in-progress">In Progress</span></td>
+                <td>
+                    <button class="status-btn pending">Pending</button>
+                    <button class="status-btn in-progress">In Progress</button>
+                    <button class="status-btn resolved">Resolved</button>
+                </td>
+            </tr>
+
+            
+            <tr>
+                <td>#103</td>
+                <td>Shivam Kushwaha</td>
+                <td>Civil</td>
+                <td>Classroom</td>
+                <td>Projector not working in room 204.</td>
+                <td><span class="resolved">Resolved</span></td>
+                <td>
+                    <button class="status-btn pending">Pending</button>
+                    <button class="status-btn in-progress">In Progress</button>
+                    <button class="status-btn resolved">Resolved</button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+</body>
+</html>

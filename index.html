@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>College Complaint Portal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.4s ease;
+
+            /* Light mode defaults */
+            --text-main: #333;
+            --text-heading: #374151;
+            --btn-text: #ffffff;
+            --toggle-text: #333;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --hero-bg: rgba(255, 255, 255, 0.7);
+            --btn-bg: #7ca5a3;
+            --btn-bg-hover: #6c9693;
+        }
+
+        /* Full-page dark mode */
+        body.dark-mode {
+            background: #0f172a !important;
+            --text-main: #e5e7eb;
+            --text-heading: #cbd5f5;
+            --btn-text: #e6fffa;
+            --toggle-text: #e5e7eb;
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --hero-bg: rgba(15, 23, 42, 0.95);
+            --btn-bg: #38b2ac;
+            --btn-bg-hover: #319795;
+        }
+
+        /* Top controls row */
+        .top-controls {
+            width: 80%;
+            max-width: 900px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .mode-toggle,
+        .theme-select {
+            padding: 8px 14px;
+            font-size: 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,0,0,0.15);
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--toggle-text);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            transition: 0.3s ease;
+        }
+
+        .mode-toggle:hover,
+        .theme-select:hover {
+            transform: translateY(-1px);
+        }
+
+        body.dark-mode .mode-toggle,
+        body.dark-mode .theme-select {
+            background: rgba(15, 23, 42, 0.9);
+            border-color: rgba(148, 163, 184, 0.6);
+        }
+
+        /* Hero section */
+        .hero {
+            width: 80%;
+            max-width: 900px;
+            margin-top: 30px;
+            background: var(--hero-bg);
+            padding: 40px 60px;
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--text-heading);
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin: 8px;
+            border-radius: 8px;
+            border: none;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--btn-bg-hover);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Info section */
+        .info-box {
+            width: 80%;
+            max-width: 900px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+            background: var(--card-bg);
+            padding: 25px 30px;
+            border-radius: 14px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.16);
+        }
+
+        .info-box h2 {
+            text-align: center;
+            margin-bottom: 18px;
+            color: var(--text-heading);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 16px;
+        }
+
+        .info-item {
+            background: rgba(255,255,255,0.35);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        body.dark-mode .info-item {
+            background: rgba(15,23,42,0.85);
+        }
+
+        .info-item h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+            color: var(--text-heading);
+        }
+
+        .info-item p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-main);
+            opacity: 0.95;
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 30px 20px;
+            }
+            .info-box {
+                padding: 20px;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top controls: theme + dark/light -->
+    <div class="top-controls">
+        <select id="themeSelect" class="theme-select">
+            <option value="teal">Teal</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="purple">Purple</option>
+        </select>
+        <button id="modeToggle" class="mode-toggle">🌙 Dark Mode</button>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>COLLEGE COMPLAINT PORTAL</h1>
+        <p>Your voice matters — submit issues and get quick resolutions.</p>
+        <a href="login.html" class="btn">Login</a>
+        <a href="register.html" class="btn">Register</a>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-box">
+        <h2>More Information</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <h3>About Us</h3>
+                <p>This portal helps students submit complaints easily and ensures quick responses from college administration.</p>
+            </div>
+            <div class="info-item">
+                <h3>Contact Us</h3>
+                <p>Email: support@collegeportal.com<br>Phone: +91 98765 43210</p>
+            </div>
+            <div class="info-item">
+                <h3>Helpline</h3>
+                <p>24/7 Student Support<br>Call: 1800-123-456</p>
+            </div>
+            <div class="info-item">
+                <h3>Terms &amp; Conditions</h3>
+                <p>All complaints must be genuine. Misuse of the portal may result in disciplinary action.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const toggleBtn   = document.getElementById("modeToggle");
+        const themeSelect = document.getElementById("themeSelect");
+
+        const themes = {
+            teal:   ["#d9e6e2", "#c4ccd3"],
+            green:  ["#e1f3df", "#c9e4c6"],
+            blue:   ["#dce9ff", "#c8dbf0"],
+            purple: ["#efe4ff", "#dbc9ff"]
+        };
+
+        function applyTheme(name) {
+            const [bg1, bg2] = themes[name] || themes.teal;
+            if (!document.body.classList.contains("dark-mode")) {
+                document.body.style.background = `linear-gradient(135deg, ${bg1}, ${bg2})`;
+            }
+            localStorage.setItem("pageTheme", name);
+        }
+
+        function updateModeButton() {
+            const isDark = document.body.classList.contains("dark-mode");
+            toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+            themeSelect.disabled = isDark; 
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle("dark-mode");
+            const isDark = document.body.classList.contains("dark-mode");
+            localStorage.setItem("themeMode", isDark ? "dark" : "light");
+            if (isDark) {
+                document.body.style.background = "#0f172a";
+            } else {
+                applyTheme(themeSelect.value);
+            }
+            updateModeButton();
+        }
+
+        toggleBtn.addEventListener("click", toggleMode);
+        themeSelect.addEventListener("change", () => applyTheme(themeSelect.value));
+
+        const savedTheme = localStorage.getItem("pageTheme") || "teal";
+        const savedMode  = localStorage.getItem("themeMode");
+
+        themeSelect.value = savedTheme;
+
+        if (savedMode === "dark") {
+            document.body.classList.add("dark-mode");
+            document.body.style.background = "#0f172a";
+        } else {
+            applyTheme(savedTheme);
+        }
+
+        updateModeButton();
+    </script>
+</body>
+</html>

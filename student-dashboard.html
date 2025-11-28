@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2>Submit Complaint</h2>
+
+    <form id="complaintForm">
+      <label>Category</label>
+      <select id="category">
+        <option value="hostel">Hostel</option>
+        <option value="network">Network</option>
+        <option value="academics">Academics</option>
+      </select>
+
+      <label>Title</label>
+      <input type="text" id="title" required>
+
+      <label>Description</label>
+      <textarea id="description" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <h2>My Complaints</h2>
+    <div id="myComplaints"></div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/student.js"></script>
+</body>
+</html>
