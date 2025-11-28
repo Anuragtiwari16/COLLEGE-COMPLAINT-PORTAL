@@ -68,7 +68,7 @@ Department-based complaint routing
 Analytics dashboard for admin
 
 👨‍💻 Author
-ATUL KUSHWAHA
+ANURAG TIWARI
 GitHub: https://github.com/Anuragtiwari16
 
 📜 License
