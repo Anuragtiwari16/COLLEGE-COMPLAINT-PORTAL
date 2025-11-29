@@ -14,35 +14,53 @@
             align-items: center;
             transition: all 0.4s ease;
 
-            /* Light mode defaults */
-            --text-main: #333;
-            --text-heading: #374151;
+            --text-main: #4b5563;
+            --text-heading: #111827;
+            --muted: #6b7280;
             --btn-text: #ffffff;
-            --toggle-text: #333;
-            --card-bg: rgba(255, 255, 255, 0.8);
-            --hero-bg: rgba(255, 255, 255, 0.7);
-            --btn-bg: #7ca5a3;
-            --btn-bg-hover: #6c9693;
+            --toggle-text: #374151;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --hero-bg: rgba(255, 255, 255, 0.92);
+            --pill-bg: rgba(125, 211, 252, 0.18);
+            --btn-bg: #2563eb;
+            --btn-bg-hover: #1d4ed8;
+            --accent: #22c55e;
+            --border-subtle: rgba(148,163,184,0.5);
         }
 
-        /* Full-page dark mode */
         body.dark-mode {
-            background: #0f172a !important;
+            background: #020617 !important;
             --text-main: #e5e7eb;
-            --text-heading: #cbd5f5;
+            --text-heading: #f9fafb;
+            --muted: #9ca3af;
             --btn-text: #e6fffa;
             --toggle-text: #e5e7eb;
             --card-bg: rgba(15, 23, 42, 0.9);
-            --hero-bg: rgba(15, 23, 42, 0.95);
+            --hero-bg: rgba(15, 23, 42, 0.96);
+            --pill-bg: rgba(56, 189, 248, 0.15);
             --btn-bg: #38b2ac;
-            --btn-bg-hover: #319795;
+            --btn-bg-hover: #0d9488;
+            --accent: #22c55e;
+            --border-subtle: rgba(51,65,85,0.9);
         }
 
-        /* Top controls row */
+        .page-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .top-controls {
-            width: 80%;
-            max-width: 900px;
-            margin-top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .top-inner {
+            width: 90%;
+            max-width: 1100px;
             display: flex;
             justify-content: flex-end;
             gap: 10px;
@@ -50,132 +68,591 @@
 
         .mode-toggle,
         .theme-select {
-            padding: 8px 14px;
+            padding: 7px 14px;
             font-size: 12px;
             border-radius: 999px;
-            border: 1px solid rgba(0,0,0,0.15);
+            border: 1px solid rgba(148,163,184,0.6);
             cursor: pointer;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             color: var(--toggle-text);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-            transition: 0.3s ease;
+            box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+            transition: 0.25s ease;
+            backdrop-filter: blur(10px);
         }
 
         .mode-toggle:hover,
         .theme-select:hover {
             transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(15, 23, 42, 0.16);
         }
 
         body.dark-mode .mode-toggle,
         body.dark-mode .theme-select {
-            background: rgba(15, 23, 42, 0.9);
-            border-color: rgba(148, 163, 184, 0.6);
+            background: rgba(15, 23, 42, 0.95);
+            border-color: rgba(148,163,184,0.8);
         }
 
-        /* Hero section */
-        .hero {
-            width: 80%;
-            max-width: 900px;
-            margin-top: 30px;
-            background: var(--hero-bg);
-            padding: 40px 60px;
-            border-radius: 18px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.18);
-            text-align: center;
-            animation: fadeIn 0.8s ease;
+        .navbar-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 6px;
         }
 
-        h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
+        .navbar {
+            width: 90%;
+            max-width: 1100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            margin-top: 6px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.96);
+            box-shadow: 0 10px 30px rgba(15,23,42,0.12);
+            border: 1px solid rgba(148,163,184,0.5);
+            backdrop-filter: blur(16px);
+        }
+
+        body.dark-mode .navbar {
+            background: rgba(15,23,42,0.96);
+            border-color: rgba(51,65,85,0.9);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: radial-gradient(circle at 20% 20%, #38bdf8, #6366f1 45%, #22c55e 80%);
+            box-shadow: 0 6px 16px rgba(56,189,248,0.5);
+        }
+
+        .brand-text-main {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.03em;
             color: var(--text-heading);
         }
 
-        p {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: var(--text-main);
-            opacity: 0.9;
+        .brand-text-sub {
+            font-size: 11px;
+            color: var(--muted);
         }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 22px;
-            margin: 8px;
-            border-radius: 8px;
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 13px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg,#38bdf8,#6366f1);
+            transition: width 0.2s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 7px 16px;
+            border-radius: 999px;
+            border: none;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37,99,235,0.4);
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--btn-bg-hover);
+            transform: translateY(-1px);
+        }
+
+        .hero-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 26px;
+        }
+
+        .hero {
+            width: 90%;
+            max-width: 1100px;
+            background: var(--hero-bg);
+            padding: 32px 34px;
+            border-radius: 24px;
+            backdrop-filter: blur(18px);
+            box-shadow: 0 24px 55px rgba(15,23,42,0.22);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            overflow: hidden;
+        }
+
+        .hero-left,
+        .hero-right {
+            flex: 1;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: var(--pill-bg);
+            border: 1px solid rgba(125,211,252,0.6);
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .hero-pill-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34,197,94,0.35);
+        }
+
+        .hero-title {
+            font-size: 32px;
+            line-height: 1.2;
+            margin: 4px 0 8px;
+            color: var(--text-heading);
+        }
+
+        .hero-title span {
+            background: linear-gradient(120deg,#38bdf8,#6366f1,#22c55e);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: var(--text-main);
+            max-width: 420px;
+            margin-bottom: 18px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .btn-primary {
+            padding: 11px 22px;
+            border-radius: 999px;
             border: none;
             background: var(--btn-bg);
             color: var(--btn-text);
             font-weight: 600;
+            font-size: 13px;
             text-decoration: none;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: 0.3s ease;
+            box-shadow: 0 8px 22px rgba(37,99,235,0.45);
+            transition: 0.25s ease;
         }
 
-        .btn:hover {
+        .btn-primary:hover {
             background: var(--btn-bg-hover);
-            transform: translateY(-2px) scale(1.02);
+            transform: translateY(-2px) scale(1.01);
         }
 
-        /* Info section */
-        .info-box {
-            width: 80%;
-            max-width: 900px;
-            margin-top: 30px;
-            margin-bottom: 40px;
-            background: var(--card-bg);
-            padding: 25px 30px;
+        .btn-secondary {
+            padding: 11px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--border-subtle);
+            background: transparent;
+            color: var(--text-main);
+            font-size: 13px;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-secondary span.icon {
+            font-size: 14px;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-meta-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        .hero-right-card {
+            border-radius: 20px;
+            padding: 18px 18px 16px;
+            border: 1px solid var(--border-subtle);
+            background: rgba(255,255,255,0.94);
+            box-shadow: 0 18px 35px rgba(15,23,42,0.18);
+        }
+
+        body.dark-mode .hero-right-card {
+            background: rgba(15,23,42,0.96);
+        }
+
+        .hero-right-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .hero-right-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-heading);
+        }
+
+        .hero-right-badge {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(34,197,94,0.14);
+            color: #16a34a;
+        }
+
+        body.dark-mode .hero-right-badge {
+            background: rgba(22,163,74,0.2);
+            color: #4ade80;
+        }
+
+        .progress-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            margin-bottom: 10px;
+            color: var(--muted);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            border-radius: 999px;
+            background: rgba(148,163,184,0.35);
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .progress-fill {
+            width: 76%;
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg,#22c55e,#38bdf8,#6366f1);
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .stat-card {
+            flex: 1;
             border-radius: 14px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.16);
+            padding: 10px 10px 9px;
+            background: rgba(249,250,251,0.92);
+            border: 1px solid rgba(226,232,240,0.9);
+            font-size: 11px;
+        }
+
+        body.dark-mode .stat-card {
+            background: rgba(15,23,42,0.96);
+            border-color: rgba(51,65,85,0.9);
+        }
+
+        .stat-label {
+            color: var(--muted);
+            margin-bottom: 2px;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-heading);
+        }
+
+        .stat-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            margin-top: 2px;
+            color: var(--accent);
+        }
+
+        .stat-chip span {
+            font-size: 11px;
+        }
+
+        .info-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 26px;
+            margin-bottom: 28px;
+        }
+
+        .info-box {
+            width: 90%;
+            max-width: 1100px;
+            background: var(--card-bg);
+            padding: 24px 26px 22px;
+            border-radius: 22px;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 18px 40px rgba(15,23,42,0.18);
+            border: 1px solid rgba(148,163,184,0.5);
+        }
+
+        body.dark-mode .info-box {
+            border-color: rgba(51,65,85,0.9);
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            gap: 12px;
+        }
+
+        .info-title-block {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
         .info-box h2 {
-            text-align: center;
-            margin-bottom: 18px;
+            margin: 0;
+            font-size: 20px;
             color: var(--text-heading);
+        }
+
+        .info-subtitle {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .info-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .info-badge {
+            font-size: 10px;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: rgba(59,130,246,0.08);
+            border: 1px solid rgba(59,130,246,0.4);
+        }
+
+        body.dark-mode .info-badge {
+            background: rgba(37,99,235,0.12);
+            border-color: rgba(37,99,235,0.6);
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0,1fr));
-            gap: 16px;
+            grid-template-columns: repeat(4, minmax(0,1fr));
+            gap: 14px;
+            margin-bottom: 18px;
         }
 
         .info-item {
-            background: rgba(255,255,255,0.35);
-            border-radius: 10px;
-            padding: 14px 16px;
+            border-radius: 14px;
+            padding: 12px 12px 10px;
+            background: rgba(249,250,251,0.96);
+            border: 1px solid rgba(226,232,240,0.9);
         }
 
         body.dark-mode .info-item {
-            background: rgba(15,23,42,0.85);
+            background: rgba(15,23,42,0.96);
+            border-color: rgba(51,65,85,0.9);
         }
 
         .info-item h3 {
             margin: 0 0 6px;
-            font-size: 16px;
+            font-size: 14px;
             color: var(--text-heading);
         }
 
         .info-item p {
             margin: 0;
-            font-size: 14px;
+            font-size: 12px;
             color: var(--text-main);
-            opacity: 0.95;
+        }
+
+        .steps-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 4px;
+            border-top: 1px dashed rgba(148,163,184,0.6);
+            padding-top: 10px;
+        }
+
+        .step-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(248,250,252,0.96);
+        }
+
+        body.dark-mode .step-pill {
+            background: rgba(15,23,42,0.96);
+        }
+
+        .step-number {
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(148,163,184,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .footer-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .footer {
+            width: 90%;
+            max-width: 1100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 6px;
+            border-top: 1px solid rgba(148,163,184,0.4);
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--muted);
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-right {
+            font-size: 10px;
+        }
+
+        @media (max-width: 880px) {
+            .navbar {
+                border-radius: 18px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                flex-direction: column;
+                padding: 26px 20px;
+            }
+
+            .hero-right-card {
+                width: 100%;
+            }
+
+            .info-grid {
+                grid-template-columns: repeat(2, minmax(0,1fr));
+            }
         }
 
         @media (max-width: 640px) {
-            .hero {
-                padding: 30px 20px;
+            .navbar {
+                padding: 10px 12px;
             }
+
+            .hero-title {
+                font-size: 24px;
+            }
+
+            .hero-subtitle {
+                font-size: 13px;
+            }
+
             .info-box {
-                padding: 20px;
+                padding: 18px 16px;
+                border-radius: 18px;
             }
+
             .info-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
             }
         }
 
@@ -186,101 +663,232 @@
     </style>
 </head>
 <body>
-    <!-- Top controls: theme + dark/light -->
+<div class="page-wrapper">
     <div class="top-controls">
-        <select id="themeSelect" class="theme-select">
-            <option value="teal">Teal</option>
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
-            <option value="purple">Purple</option>
-        </select>
-        <button id="modeToggle" class="mode-toggle">🌙 Dark Mode</button>
-    </div>
-
-    <!-- Hero -->
-    <div class="hero">
-        <h1>COLLEGE COMPLAINT PORTAL</h1>
-        <p>Your voice matters — submit issues and get quick resolutions.</p>
-        <a href="login.html" class="btn">Login</a>
-        <a href="register.html" class="btn">Register</a>
-    </div>
-
-    <!-- Info Section -->
-    <div class="info-box">
-        <h2>More Information</h2>
-        <div class="info-grid">
-            <div class="info-item">
-                <h3>About Us</h3>
-                <p>This portal helps students submit complaints easily and ensures quick responses from college administration.</p>
-            </div>
-            <div class="info-item">
-                <h3>Contact Us</h3>
-                <p>Email: support@collegeportal.com<br>Phone: +91 98765 43210</p>
-            </div>
-            <div class="info-item">
-                <h3>Helpline</h3>
-                <p>24/7 Student Support<br>Call: 1800-123-456</p>
-            </div>
-            <div class="info-item">
-                <h3>Terms &amp; Conditions</h3>
-                <p>All complaints must be genuine. Misuse of the portal may result in disciplinary action.</p>
-            </div>
+        <div class="top-inner">
+            <select id="themeSelect" class="theme-select">
+                <option value="teal">Teal</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="purple">Purple</option>
+            </select>
+            <button id="modeToggle" class="mode-toggle">🌙 Dark Mode</button>
         </div>
     </div>
 
-    <script>
-        const toggleBtn   = document.getElementById("modeToggle");
-        const themeSelect = document.getElementById("themeSelect");
+    <div class="navbar-wrapper">
+        <header class="navbar">
+            <div class="brand">
+                <div class="brand-logo"></div>
+                <div>
+                    <div class="brand-text-main">Complaint Portal</div>
+                    <div class="brand-text-sub">For Colleges & Students</div>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#how">How it works</a>
+                <a href="#contact">Contact</a>
+                <a href="#terms">Terms</a>
+            </nav>
+            <a href="login.html" class="nav-cta">Login</a>
+        </header>
+    </div>
 
-        const themes = {
-            teal:   ["#d9e6e2", "#c4ccd3"],
-            green:  ["#e1f3df", "#c9e4c6"],
-            blue:   ["#dce9ff", "#c8dbf0"],
-            purple: ["#efe4ff", "#dbc9ff"]
-        };
+    <div class="hero-wrapper">
+        <section class="hero">
+            <div class="hero-left">
+                <div class="hero-pill">
+                    <div class="hero-pill-dot"></div>
+                    <span>Secure & confidential college grievance system</span>
+                </div>
+                <h1 class="hero-title">
+                    Raise issues in seconds, <span>track responses in real time.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    A dedicated space for students, faculty and admin to report problems, follow updates,
+                    and close complaints faster – all in one place.
+                </p>
 
-        function applyTheme(name) {
-            const [bg1, bg2] = themes[name] || themes.teal;
-            if (!document.body.classList.contains("dark-mode")) {
-                document.body.style.background = `linear-gradient(135deg, ${bg1}, ${bg2})`;
-            }
-            localStorage.setItem("pageTheme", name);
+                <div class="hero-actions">
+                    <a href="login.html" class="btn-primary">Login to Portal</a>
+                    <a href="register.html" class="btn-secondary">
+                        <span class="icon">✏️</span> Create new account
+                    </a>
+                </div>
+
+                <div class="hero-meta">
+                    <div class="hero-meta-item">
+                        <span class="hero-meta-dot"></span>
+                        <span>Complaints stay private between you and the college.</span>
+                    </div>
+                    <div class="hero-meta-item">
+                        <span class="hero-meta-dot"></span>
+                        <span>Track status: Submitted → Under Review → Resolved.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="hero-right-card">
+                    <div class="hero-right-header">
+                        <div class="hero-right-title">Today at a glance</div>
+                        <div class="hero-right-badge">Live campus stats</div>
+                    </div>
+                    <div class="progress-row">
+                        <span>Complaints resolved</span>
+                        <span>76%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <div class="stat-label">Active complaints</div>
+                            <div class="stat-value">32</div>
+                            <div class="stat-chip">
+                                <span>⬆</span>
+                                <span>5 new today</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Avg. response time</div>
+                            <div class="stat-value">24 hrs</div>
+                            <div class="stat-chip">
+                                <span>✅</span>
+                                <span>Within college SLA</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-meta" style="margin-top:10px;">
+                        <div class="hero-meta-item">
+                            <span class="hero-meta-dot"></span>
+                            <span>Student-friendly & admin-approved workflow.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="info-wrapper" id="about">
+        <section class="info-box">
+            <div class="info-header">
+                <div class="info-title-block">
+                    <h2>Why this portal?</h2>
+                    <p class="info-subtitle">
+                        One platform for all college complaints – academic, hostel, fees, facilities and more.
+                    </p>
+                </div>
+                <div class="info-badges">
+                    <span class="info-badge">🎓 For Students</span>
+                    <span class="info-badge">🏫 For Colleges</span>
+                    <span class="info-badge">🔐 Secure & Logged</span>
+                </div>
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>About Us</h3>
+                    <p>
+                        This portal helps students submit complaints easily and ensures quick responses from
+                        college administration with transparent tracking.
+                    </p>
+                </div>
+                <div class="info-item" id="contact">
+                    <h3>Contact Us</h3>
+                    <p>
+                        Email: support@collegeportal.com<br>
+                        Phone: +91 98765 43210
+                    </p>
+                </div>
+                <div class="info-item">
+                    <h3>Helpline</h3>
+                    <p>
+                        24/7 Student Support<br>
+                        Call: 1800-123-456
+                    </p>
+                </div>
+                <div class="info-item" id="terms">
+                    <h3>Terms &amp; Conditions</h3>
+                    <p>
+                        All complaints must be genuine. Misuse of the portal may result in
+                        disciplinary action as per college rules.
+                    </p>
+                </div>
+            </div>
+            <div class="steps-row" id="how">
+                <div class="step-pill">
+                    <div class="step-number">1</div>
+                    <span>Login or create your account</span>
+                </div>
+                <div class="step-pill">
+                    <div class="step-number">2</div>
+                    <span>Select complaint type & explain issue</span>
+                </div>
+                <div class="step-pill">
+                    <div class="step-number">3</div>
+                    <span>Track status and get notified on updates</span>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="footer-wrapper">
+        <footer class="footer">
+            <div>© 2025 College Complaint Portal. All rights reserved.</div>
+            <div class="footer-right">
+                Powered by your college administration.
+            </div>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#contact">Support</a>
+                <a href="#terms">Policies</a>
+            </div>
+        </footer>
+    </div>
+</div>
+<script>
+    const toggleBtn   = document.getElementById("modeToggle");
+    const themeSelect = document.getElementById("themeSelect");
+    const themes = {
+        teal:   ["#d9f99d", "#a5f3fc"],
+        green:  ["#dcfce7", "#bbf7d0"],
+        blue:   ["#dbeafe", "#bfdbfe"],
+        purple: ["#ede9fe", "#ddd6fe"]
+    };
+    function applyTheme(name) {
+        const [bg1, bg2] = themes[name] || themes.teal;
+        if (!document.body.classList.contains("dark-mode")) {
+            document.body.style.background = `radial-gradient(circle at top left, ${bg1}, ${bg2})`;
         }
-
-        function updateModeButton() {
-            const isDark = document.body.classList.contains("dark-mode");
-            toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-            themeSelect.disabled = isDark; 
-        }
-
-        function toggleMode() {
-            document.body.classList.toggle("dark-mode");
-            const isDark = document.body.classList.contains("dark-mode");
-            localStorage.setItem("themeMode", isDark ? "dark" : "light");
-            if (isDark) {
-                document.body.style.background = "#0f172a";
-            } else {
-                applyTheme(themeSelect.value);
-            }
-            updateModeButton();
-        }
-
-        toggleBtn.addEventListener("click", toggleMode);
-        themeSelect.addEventListener("change", () => applyTheme(themeSelect.value));
-
-        const savedTheme = localStorage.getItem("pageTheme") || "teal";
-        const savedMode  = localStorage.getItem("themeMode");
-
-        themeSelect.value = savedTheme;
-
-        if (savedMode === "dark") {
-            document.body.classList.add("dark-mode");
-            document.body.style.background = "#0f172a";
+        localStorage.setItem("pageTheme", name);
+    }
+    function updateModeButton() {
+        const isDark = document.body.classList.contains("dark-mode");
+        toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        themeSelect.disabled = isDark;
+    }
+    function toggleMode() {
+        document.body.classList.toggle("dark-mode");
+        const isDark = document.body.classList.contains("dark-mode");
+        localStorage.setItem("themeMode", isDark ? "dark" : "light");
+        if (isDark) {
+            document.body.style.background = "#020617";
         } else {
-            applyTheme(savedTheme);
+            applyTheme(themeSelect.value);
         }
-
         updateModeButton();
-    </script>
+    }
+    toggleBtn.addEventListener("click", toggleMode);
+    themeSelect.addEventListener("change", () => applyTheme(themeSelect.value));
+    const savedTheme = localStorage.getItem("pageTheme") || "teal";
+    const savedMode  = localStorage.getItem("themeMode");
+    themeSelect.value = savedTheme;
+    if (savedMode === "dark") {
+        document.body.classList.add("dark-mode");
+        document.body.style.background = "#020617";
+    } else {
+        applyTheme(savedTheme);
+    }
+    updateModeButton();
+</script>
 </body>
 </html>
