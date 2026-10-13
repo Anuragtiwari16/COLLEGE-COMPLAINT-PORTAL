@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusResolve AI | Next-Gen Collegiate Grievance & Whistleblower Ecosystem</title>
+  <meta name="description" content="AI-Augmented Grievance Redressal and Anonymous Whistleblower Protection Ecosystem for Higher Education Institutes." />
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    /* Landing Hero Styles */
+    .landing-hero-wrap {
+      width: 92%;
+      max-width: 1240px;
+      margin: 32px auto 0;
+      position: relative;
+    }
+
+    .hero-card {
+      padding: 56px 44px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+      border-radius: 28px;
+    }
+
+    .hero-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary-600);
+      margin-bottom: 16px;
+    }
+    body.dark-mode .hero-badge-pill {
+      color: var(--primary-300);
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    .hero-title span {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .quick-track-widget {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 36px;
+    }
+
+    .feature-card {
+      padding: 26px 24px;
+      border-radius: var(--radius-md);
+      transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 14px;
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary-600);
+    }
+
+    .vitals-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 40px;
+    }
+
+    .vital-item {
+      text-align: center;
+      padding: 20px 14px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface-translucent);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .vital-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+
+    .vital-desc {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 4px;
+    }
+
+    .interactive-demo-card {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+        padding: 36px 24px;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .vitals-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top App Navigation -->
+  <header class="app-navbar">
+    <a href="index.html" class="brand-wrapper">
+      <div class="brand-mark">CR</div>
+      <div>
+        <div class="brand-title">CampusResolve <span class="brand-badge">Central Portal</span></div>
+      </div>
+    </a>
+
+    <nav class="nav-menu">
+      <a href="#innovations" class="nav-link">AI Innovations</a>
+      <a href="#vitals" class="nav-link">Live Vitals</a>
+      <a href="#helpline" class="nav-link">Helpline</a>
+      <a href="student-dashboard.html" class="nav-link">Student Portal</a>
+      <a href="admin-dashboard.html" class="nav-link">Command Center</a>
+    </nav>
+
+    <div class="nav-actions">
+      <div id="liveRealtimeBadge" style="font-size:0.75rem; font-weight:700; display:flex; align-items:center; gap:6px; color:#10b981; padding: 4px 10px; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-full); border: 1px solid rgba(16, 185, 129, 0.25);">
+        <span style="width:7px; height:7px; border-radius:50%; background:#10b981; display:inline-block; box-shadow:0 0 8px #10b981;"></span> Real-Time Live Sync
+      </div>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        🌙 Dark Mode
+      </button>
+      <a href="login.html" class="btn btn-secondary btn-sm">Sign In</a>
+      <a href="complaint.html" class="btn btn-primary btn-sm">Lodge Grievance →</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="landing-hero-wrap">
+    <div class="glass-panel hero-card">
+      <div class="hero-left">
+        <div class="hero-badge-pill">
+          <span style="font-size: 14px;">🏛️</span>
+          <span>UGC & AICTE Mandated Central Grievance Redressal Cell</span>
+        </div>
+
+        <h1 class="hero-title">
+          Next-Gen AI Grievance Intelligence & <span>Whistleblower Redressal.</span>
+        </h1>
+
+        <p class="hero-desc">
+          Empowering college students and authorities with <strong>Real-Time AI Urgency Triage</strong>, 
+          <strong>Zero-Knowledge Whistleblower Protection</strong>, 
+          <strong>4-Tier Automated SLA Escalation</strong>, and 
+          <strong>Two-Way Student Resolution Proof</strong>.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="complaint.html" class="btn btn-primary btn-lg">
+            ✍️ Lodge Grievance Now
+          </a>
+          <a href="admin-dashboard.html" class="btn btn-secondary btn-lg">
+            🏛️ Executive Command Center
+          </a>
+        </div>
+
+        <div style="display: flex; gap: 20px; font-size: 0.8rem; color: var(--text-muted); flex-wrap: wrap;">
+          <span style="display:flex; align-items:center; gap:5px;">🛡️ 100% Identity Shielding</span>
+          <span style="display:flex; align-items:center; gap:5px;">⚡ Strict 4h Safety SLA</span>
+          <span style="display:flex; align-items:center; gap:5px;">📜 UGC & AICTE Compliant</span>
+        </div>
+      </div>
+
+      <!-- Quick Interactive Case Tracker Widget -->
+      <div class="quick-track-widget">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+          <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">
+            🔍 Instant Docket Lookup
+          </div>
+          <span class="badge" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan);">Live Sync</span>
+        </div>
+
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px;">
+          Track any active grievance or anonymous whistleblower token code instantaneously:
+        </p>
+
+        <form id="heroLookupForm" onsubmit="event.preventDefault(); heroCaseLookup();">
+          <div class="form-group" style="margin-bottom: 12px;">
+            <input type="text" id="heroLookupInput" class="form-input" placeholder="e.g. GRV-2026-0102 or ANON-8821-XQ" value="GRV-2026-0102" style="font-family: 'JetBrains Mono', monospace;" required />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: var(--radius-md);">
+            Inspect Case Timeline →
+          </button>
+        </form>
+
+        <div id="heroLookupResult" style="margin-top: 14px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Campus Vitals Section -->
+  <section class="container-xl" id="vitals">
+    <div class="vitals-bar">
+      <div class="vital-item">
+        <div class="vital-num" id="vitalSlaRate">94.2%</div>
+        <div class="vital-desc">SLA Compliance Rate</div>
+      </div>
+      <div class="vital-item">
+        <div class="vital-num" id="vitalAvgHours">16.4h</div>
+        <div class="vital-desc">Avg. Turnaround Time</div>
+      </div>
+      <div class="vital-item">
+        <div class="vital-num">100%</div>
+        <div class="vital-desc">Zero-Knowledge Whistleblower</div>
+      </div>
+      <div class="vital-item">
+        <div class="vital-num">4 Tiers</div>
+        <div class="vital-desc">Autonomous Escalation Matrix</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Institutional Portal Directory & Access Gateways -->
+  <section class="container-xl">
+    <div class="interactive-demo-card">
+      <div>
+        <h3 style="font-size: 1.25rem; margin-bottom: 4px;">🏛️ Institutional Portal Directory & Access Gateways</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">
+          Direct authorization gateways for Students, Hostel Wardens, Department Authorities, and Directorate:
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="student-dashboard.html" class="btn btn-secondary btn-sm">
+          👨‍🎓 Student Portal
+        </a>
+        <a href="admin-dashboard.html" class="btn btn-secondary btn-sm">
+          👩‍🏫 Hostel Warden Console
+        </a>
+        <a href="admin-dashboard.html" class="btn btn-primary btn-sm">
+          🏛️ Dean / Proctor Command Center
+        </a>
+        <a href="complaint.html" class="btn btn-secondary btn-sm">
+          ✍️ Express Grievance Docket
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Innovations Section -->
+  <section class="container-xl" id="innovations" style="margin-top: 60px;">
+    <div style="text-align: center; max-width: 680px; margin: 0 auto 30px;">
+      <h2 style="font-size: 2.1rem; margin-bottom: 8px;">Key Technological Innovations</h2>
+      <p style="font-size: 0.95rem; color: var(--text-muted);">
+        Moving beyond archaic physical complaint boxes into an intelligent, proactive campus governance ecosystem.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <!-- Feature 1 -->
+      <div class="glass-card feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Real-Time AI Urgency & Triage</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">
+          Natural Language processing analyzes grievance text live as students type. Crisis terms (ragging, mental distress, electrical hazard) auto-trigger P0 Critical priority with a mandatory 4-hour SLA window.
+        </p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="glass-card feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Zero-Knowledge Whistleblower</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">
+          Allows victims of harassment, grading bias, or ragging to report with 100% anonymity. Generates an encrypted <code>ANON-XXXX-XX</code> token so students can track progress and communicate without fear.
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="glass-card feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">4-Tier Automated SLA Escalation</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">
+          Prevents complaints from being buried. If a technician does not act within 24h, the ticket auto-escalates to the HOD/Warden (48h), Dean (72h), and ultimately the College Director with audit flags.
+        </p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="glass-card feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Two-Way Resolution Verification</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">
+          Eliminates fake ticket closures. When administration marks work complete, it enters "Pending Student Verification". The student must verify and rate the fix, or dispute and reopen with 1-click.
+        </p>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="glass-card feature-card">
+        <div class="feature-icon">🎙️</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Multi-Modal Voice & Geo Evidence</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">
+          Includes in-browser voice memo recording with live waveform frequency capture, camera image uploads, and campus location tagging across hostels and labs.
+        </p>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="glass-card feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Campus Hotspot Heatmap & Deduplication</h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">
+          Semantic algorithms detect recurring complaints (e.g. 50 students reporting the same broken water cooler) and aggregate them into single upvotable community issues with failure hotspot analytics.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency Statutory Helplines Directory -->
+  <section class="container-xl" id="helpline" style="margin-top: 60px; margin-bottom: 60px;">
+    <div class="glass-panel" style="padding: 30px; border-left: 6px solid var(--priority-critical);">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; margin-bottom:14px;">
+        <div>
+          <h3 style="font-size: 1.25rem; color: var(--priority-critical);">🚨 24x7 Statutory Emergency & Safety Helplines</h3>
+          <p style="font-size: 0.82rem; color: var(--text-secondary);">Immediate intervention numbers for students under distress or ragging threat:</p>
+        </div>
+        <span class="badge badge-critical"><span class="badge-dot"></span> Emergency Directory</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; font-size: 0.85rem;">
+        <div style="padding: 10px 14px; background: var(--bg-subtle); border-radius: 8px;">
+          <div style="color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase;">UGC Anti-Ragging Toll Free</div>
+          <div style="font-weight: 800; font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--priority-critical);">1800-180-5522</div>
+        </div>
+        <div style="padding: 10px 14px; background: var(--bg-subtle); border-radius: 8px;">
+          <div style="color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase;">National Women's Helpline</div>
+          <div style="font-weight: 800; font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--primary-600);">1091</div>
+        </div>
+        <div style="padding: 10px 14px; background: var(--bg-subtle); border-radius: 8px;">
+          <div style="color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase;">Chief Proctor Flying Squad</div>
+          <div style="font-weight: 800; font-family: 'JetBrains Mono', monospace; font-size: 1rem;">+91 98765 43210</div>
+        </div>
+        <div style="padding: 10px 14px; background: var(--bg-subtle); border-radius: 8px;">
+          <div style="color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase;">Campus Health Centre Ambulance</div>
+          <div style="font-weight: 800; font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--accent-emerald);">Ext. 108 / 222</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border-subtle); padding: 30px 0; margin-top: 40px; font-size: 0.82rem; color: var(--text-muted); text-align: center;">
+    <div class="container-xl" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div>© 2026 CampusResolve Central University Portal • UGC & SGRC Mandated Redressal Cell</div>
+      <div style="display:flex; gap:16px;">
+        <a href="student-dashboard.html">Student Portal</a>
+        <a href="admin-dashboard.html">Admin Command Center</a>
+        <a href="complaint.html">Lodge Grievance</a>
+        <a href="login.html">Sign In</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/store.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+    function heroCaseLookup() {
+      const code = document.getElementById("heroLookupInput").value.trim().toUpperCase();
+      const g = window.CampusResolve.getGrievanceById(code);
+      const res = document.getElementById("heroLookupResult");
+
+      if (g) {
+        const sla = window.CampusResolve.calculateSLA(g);
+        res.innerHTML = `
+          <div class="glass-card" style="padding: 14px; border-left: 4px solid var(--accent-emerald); animation: fadeIn 0.3s ease;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+              <span class="badge badge-${g.urgency.toLowerCase()}">${g.urgency}</span>
+              <span class="badge-status ${g.status}">${g.status.toUpperCase()}</span>
+            </div>
+            <div style="font-weight:700; font-size:0.86rem; margin-bottom:4px;">${g.title}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:8px;">
+              📍 ${g.location} • 🏛️ ${g.department} • ⏱️ ${sla.displayTime}
+            </div>
+            <a href="student-dashboard.html?track=${g.trackingCode}" class="btn btn-primary btn-sm" style="width:100%;">
+              Open Full Docket & Timeline →
+            </a>
+          </div>
+        `;
+      } else {
+        res.innerHTML = `
+          <div style="padding: 10px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; color: var(--priority-critical); font-size: 0.78rem;">
+            ⚠️ Docket "${code}" not found. Try sample codes <code>GRV-2026-0102</code> or <code>ANON-8821-XQ</code>.
+          </div>
+        `;
+      }
+    }
+
+    // Dynamic update of vitals from store
+    document.addEventListener("DOMContentLoaded", () => {
+      const analytics = window.CampusResolve.getAnalytics();
+      const slaRateEl = document.getElementById("vitalSlaRate");
+      if (slaRateEl) slaRateEl.textContent = `${analytics.slaComplianceRate}%`;
+    });
+  </script>
+</body>
+</html>

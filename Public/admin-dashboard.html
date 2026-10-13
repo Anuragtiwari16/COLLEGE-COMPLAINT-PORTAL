@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administrative Command Center | Office of Dean & Wardens</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    .admin-layout {
+      width: 92%;
+      max-width: 1320px;
+      margin: 22px auto 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .admin-hero {
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .admin-avatar-box {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .kpi-card {
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .kpi-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .bento-intel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .filter-toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-surface);
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--card-shadow);
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    .admin-table th {
+      background: var(--bg-subtle);
+      padding: 14px 16px;
+      font-weight: 700;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .admin-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: middle;
+    }
+
+    .admin-table tr:hover {
+      background: rgba(99, 102, 241, 0.04);
+    }
+
+    @media (max-width: 900px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .bento-intel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="app-navbar">
+    <a href="index.html" class="brand-wrapper">
+      <div class="brand-mark">CR</div>
+      <div>
+        <div class="brand-title">CampusResolve <span class="brand-badge">Command Center</span></div>
+      </div>
+    </a>
+
+    <div class="nav-actions">
+      <div id="liveRealtimeBadge" style="font-size:0.75rem; font-weight:700; display:flex; align-items:center; gap:6px; color:#10b981; padding: 4px 10px; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-full); border: 1px solid rgba(16, 185, 129, 0.25);">
+        <span style="width:7px; height:7px; border-radius:50%; background:#10b981; display:inline-block; box-shadow:0 0 8px #10b981;"></span> Real-Time Live Stream Active
+      </div>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        🌙 Dark Mode
+      </button>
+      <a href="student-dashboard.html" class="btn btn-secondary btn-sm">Student View ↗</a>
+      <a href="index.html" class="btn btn-ghost btn-sm">Home</a>
+      <a href="login.html" class="btn btn-ghost btn-sm" onclick="localStorage.removeItem('auth_token'); localStorage.removeItem('role');">Logout</a>
+    </div>
+  </header>
+
+  <!-- Admin Dashboard Layout -->
+  <main class="admin-layout">
+
+    <!-- Admin Persona Hero -->
+    <section class="glass-panel admin-hero">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div class="admin-avatar-box" id="adminProfileAvatar">👩‍🏫</div>
+        <div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <h2 style="font-size: 1.45rem;" id="adminProfileName">Dr. Sunita Rao</h2>
+            <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">Active Authority</span>
+          </div>
+          <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;" id="adminProfileBadge">
+            Hostel Warden & Assoc. Professor • Directorate of Student Welfare
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <button class="btn btn-secondary btn-sm" onclick="exportGrievancesCSV()">
+          📥 Export CSV Data
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="window.print()">
+          🖨️ Print Executive Report
+        </button>
+      </div>
+    </section>
+
+    <!-- Top KPI Vitals Grid -->
+    <section class="kpi-grid">
+      <div class="glass-card kpi-card">
+        <span class="form-hint" style="text-transform: uppercase; font-weight: 700;">Total Active Grievances</span>
+        <span class="kpi-number" id="kpiTotal">--</span>
+        <span style="font-size: 0.74rem; color: var(--text-muted);">Across all campus departments</span>
+      </div>
+
+      <div class="glass-card kpi-card">
+        <span class="form-hint" style="text-transform: uppercase; font-weight: 700;">SLA Compliance Rate</span>
+        <span class="kpi-number" style="color: var(--accent-emerald);" id="kpiSla">--%</span>
+        <span style="font-size: 0.74rem; color: var(--accent-emerald); font-weight: 600;">✅ Above AICTE/UGC Benchmark</span>
+      </div>
+
+      <div class="glass-card kpi-card">
+        <span class="form-hint" style="text-transform: uppercase; font-weight: 700;">Under Active Action</span>
+        <span class="kpi-number" style="color: var(--primary-600);" id="kpiInProgress">--</span>
+        <span style="font-size: 0.74rem; color: var(--text-muted);">Technicians currently dispatched</span>
+      </div>
+
+      <div class="glass-card kpi-card" style="border-left: 4px solid var(--priority-critical);">
+        <span class="form-hint" style="text-transform: uppercase; font-weight: 700; color: var(--priority-critical);">Critical / Emergency Flags</span>
+        <span class="kpi-number" style="color: var(--priority-critical);" id="kpiCritical">0</span>
+        <span style="font-size: 0.74rem; color: var(--priority-critical); font-weight: 600;">⚡ 4h Auto-Escalation SLA Active</span>
+      </div>
+    </section>
+
+    <!-- Visual Intelligence Bento -->
+    <section class="bento-intel-grid">
+      <!-- Campus Hotspot Heatmap Matrix -->
+      <div class="glass-panel" style="padding: 22px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <div>
+            <h4 style="font-size: 1rem;">Campus Problem Hotspot Matrix</h4>
+            <div style="font-size: 0.76rem; color: var(--text-muted);">Location cluster density analysis</div>
+          </div>
+          <span class="badge badge-high">Live Heatmap</span>
+        </div>
+        <div id="hotspotListContainer">
+          <!-- Rendered by admin.js -->
+        </div>
+      </div>
+
+      <!-- 4-Tier Automated SLA Escalation Policy -->
+      <div class="glass-panel" style="padding: 22px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <div>
+            <h4 style="font-size: 1rem;">Automated SLA Escalation Matrix</h4>
+            <div style="font-size: 0.76rem; color: var(--text-muted);">Hierarchical governance policy</div>
+          </div>
+          <span class="badge badge-low">UGC Compliant</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px; font-size:0.78rem;">
+          <div style="display:flex; justify-content:space-between; padding:6px 10px; background:var(--bg-subtle); border-radius:8px;">
+            <span><strong>Tier 1 (0 - 24 hrs):</strong> Caretaker / Technician</span>
+            <span style="color:var(--accent-emerald); font-weight:700;">First Responder</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:6px 10px; background:var(--bg-subtle); border-radius:8px;">
+            <span><strong>Tier 2 (24 - 48 hrs):</strong> HOD / Hostel Warden</span>
+            <span style="color:var(--accent-amber); font-weight:700;">Departmental Review</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:6px 10px; background:var(--bg-subtle); border-radius:8px;">
+            <span><strong>Tier 3 (48 - 72 hrs):</strong> Dean of Student Welfare</span>
+            <span style="color:var(--accent-rose); font-weight:700;">Proctorial Intervention</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:6px 10px; background:var(--bg-subtle); border-radius:8px;">
+            <span><strong>Tier 4 (> 72 hrs):</strong> College Director / Ombudsman</span>
+            <span style="color:var(--priority-critical); font-weight:700;">Statutory Audit Flag</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Triage Queue & Filter Toolbar -->
+    <section>
+      <div class="filter-toolbar">
+        <div class="filter-group">
+          <input type="text" id="adminSearchInput" class="form-input" placeholder="🔍 Search by ID, Title, Student, Location..." style="width: 280px; padding: 8px 12px; font-size: 0.82rem;" />
+
+          <select id="filterDepartment" class="form-select" style="width: 170px; padding: 8px 12px; font-size: 0.82rem;">
+            <option value="all">All Departments</option>
+            <option value="Hostel">Hostel & Living</option>
+            <option value="Computer">IT & Laboratories</option>
+            <option value="Examination">Academics / Exams</option>
+            <option value="Canteen">Mess & Food Safety</option>
+            <option value="Anti-Ragging">Anti-Ragging Cell</option>
+            <option value="Library">Library & Facilities</option>
+          </select>
+
+          <select id="filterPriority" class="form-select" style="width: 140px; padding: 8px 12px; font-size: 0.82rem;">
+            <option value="all">All Urgencies</option>
+            <option value="critical">Critical (P0)</option>
+            <option value="high">High (24h)</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+
+          <select id="filterStatus" class="form-select" style="width: 160px; padding: 8px 12px; font-size: 0.82rem;">
+            <option value="all">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="in-progress">In Progress</option>
+            <option value="pending-verification">Pending Verification</option>
+            <option value="resolved">Resolved</option>
+          </select>
+        </div>
+
+        <span id="adminRecordCount" style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted);">
+          6 Grievances Shown
+        </span>
+      </div>
+
+      <!-- Grievance Master Table -->
+      <div class="table-container" style="margin-top: 14px;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Docket ID</th>
+              <th>Complainant</th>
+              <th>Headline & Campus Zone</th>
+              <th>AI Urgency</th>
+              <th>Live SLA / Tier</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody">
+            <!-- Rendered dynamically by admin.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Comprehensive Triage & Resolution Modal -->
+  <div class="modal-backdrop" id="adminTriageModal">
+    <div class="modal-content" style="max-width: 720px;">
+      <div class="modal-header">
+        <div>
+          <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Case Docket Triage</div>
+          <h3 id="modalTriageId" style="font-size: 1.2rem; font-family: 'JetBrains Mono', monospace; color: var(--primary-600);">GRV-2026-0102</h3>
+        </div>
+        <button class="icon-btn" onclick="closeModal('adminTriageModal')">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <h4 id="modalTriageTitle" style="font-size: 1.15rem; margin-bottom: 6px;">Drinking water cooler emitting rusty brownish water</h4>
+        <p id="modalTriageDesc" style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 14px;">Detailed explanation...</p>
+
+        <div style="background: var(--bg-subtle); border-radius: 12px; padding: 14px; margin-bottom: 18px; font-size: 0.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div><strong>📍 Campus Location:</strong> <span id="modalTriageLocation">Hostel Block 3</span></div>
+          <div><strong>📂 Category:</strong> <span id="modalTriageCategory">Hostel & Living</span></div>
+          <div><strong>🏛️ Routed Dept:</strong> <span id="modalTriageDepartment">Estate Office</span></div>
+          <div><strong>👤 Complainant:</strong> <span id="modalTriageStudent">Aarav Sharma</span></div>
+          <div style="grid-column: span 2;"><strong>⏱️ SLA Performance:</strong> <span id="modalTriageSla" style="font-family: 'JetBrains Mono', monospace;">14h left • Level 1</span></div>
+        </div>
+
+        <!-- Student Voice Recording Player Box (if present) -->
+        <div id="modalAudioPreviewBox" style="margin-bottom: 16px;"></div>
+
+        <!-- Action Form -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+          <h4 style="font-size: 0.95rem; margin-bottom: 12px;">Administrative Resolution Action</h4>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="triageStatusSelect">Update Status</label>
+              <select id="triageStatusSelect" class="form-select">
+                <option value="pending">Pending</option>
+                <option value="in-review">Under In-Depth Review</option>
+                <option value="in-progress">In Progress (Work Assigned)</option>
+                <option value="pending-verification">Pending Student Verification (Action Completed)</option>
+                <option value="resolved">Resolved & Closed</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="triageAssignedOfficer">Assigned Responder / Technician</label>
+              <input type="text" id="triageAssignedOfficer" class="form-input" placeholder="e.g. Er. Manoj Kumar (Plumber)" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="triageAdminNote">Resolution Proof / Action Report Note</label>
+            <textarea id="triageAdminNote" class="form-textarea" placeholder="Describe the physical inspection result, parts replaced, or action taken for collegiate audit record..."></textarea>
+            <div class="form-hint">Tip: Marking 'Pending Student Verification' will prompt the student to inspect and confirm resolution.</div>
+          </div>
+        </div>
+
+        <!-- Immutable Audit Trail -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px;">
+          <h4 style="font-size: 0.92rem; margin-bottom: 10px;">Chronological Audit Stepper</h4>
+          <div class="timeline-stepper" id="modalAuditStepper">
+            <!-- Populated by admin.js -->
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="exportDossierPDF()">
+          📄 Export Official Dossier PDF
+        </button>
+        <button class="btn btn-primary" onclick="saveTriageChanges()">
+          💾 Save & Update Registry
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

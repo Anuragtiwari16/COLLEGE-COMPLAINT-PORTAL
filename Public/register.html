@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Institutional Registration | CampusResolve Central</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    .register-container {
+      min-height: calc(100vh - 120px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 16px;
+    }
+
+    .register-card {
+      width: 100%;
+      max-width: 640px;
+      padding: 36px 32px;
+      border-radius: var(--radius-lg);
+    }
+
+    .category-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      background: var(--bg-subtle);
+      padding: 6px;
+      border-radius: var(--radius-md);
+      margin-bottom: 22px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .cat-btn {
+      padding: 9px 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all var(--transition-fast);
+      text-align: center;
+    }
+
+    .cat-btn.active {
+      background: var(--bg-surface);
+      color: var(--primary-600);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border-subtle);
+    }
+
+    body.dark-mode .cat-btn.active {
+      color: var(--primary-300);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .category-tabs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="app-navbar">
+    <a href="index.html" class="brand-wrapper">
+      <div class="brand-mark">CR</div>
+      <div>
+        <div class="brand-title">CampusResolve <span class="brand-badge">Central Portal</span></div>
+      </div>
+    </a>
+
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        🌙 Dark Mode
+      </button>
+      <a href="index.html" class="btn btn-ghost btn-sm">Home</a>
+      <a href="login.html" class="btn btn-primary btn-sm">Sign In</a>
+    </div>
+  </header>
+
+  <!-- Register Main Container -->
+  <main class="register-container">
+    <div class="glass-panel register-card">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="width: 48px; height: 48px; border-radius: 16px; background: var(--primary-gradient); display: inline-flex; align-items: center; justify-content: center; color: white; font-size: 22px; margin-bottom: 12px; box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);">
+          📝
+        </div>
+        <h2 style="font-size: 1.55rem; margin-bottom: 4px;">Institutional Profile Registration</h2>
+        <p style="font-size: 0.84rem; color: var(--text-muted);">
+          Create authorized profile for Students, Wardens, Deans, and Department Authorities
+        </p>
+      </div>
+
+      <!-- Registration Category Selector -->
+      <div class="category-tabs">
+        <button class="cat-btn active" id="btnCatStudent" onclick="switchCategory('student')">
+          <span style="font-size: 1.15rem;">👨‍🎓</span>
+          <span>Student</span>
+        </button>
+        <button class="cat-btn" id="btnCatWarden" onclick="switchCategory('warden')">
+          <span style="font-size: 1.15rem;">👩‍🏫</span>
+          <span>Hostel Warden</span>
+        </button>
+        <button class="cat-btn" id="btnCatDean" onclick="switchCategory('dean')">
+          <span style="font-size: 1.15rem;">🏛️</span>
+          <span>Dean / Director</span>
+        </button>
+        <button class="cat-btn" id="btnCatStaff" onclick="switchCategory('staff')">
+          <span style="font-size: 1.15rem;">🔧</span>
+          <span>Department Staff</span>
+        </button>
+      </div>
+
+      <form id="universalRegisterForm">
+        <input type="hidden" id="regCategoryInput" value="student" />
+
+        <!-- Name & ID Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="regFullName">Full Legal Name</label>
+            <input type="text" id="regFullName" class="form-input" placeholder="e.g. Ananya Sen" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" id="lblRegId">Institute Roll Number</label>
+            <input type="text" id="regIdentifier" class="form-input" placeholder="e.g. 23CS108" required />
+          </div>
+        </div>
+
+        <!-- Category Specific Row 1 -->
+        <div class="form-row" id="rowStudentFields">
+          <div class="form-group">
+            <label class="form-label" for="regDepartment">Academic Department</label>
+            <select id="regDepartment" class="form-select">
+              <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Electronics & Communication">Electronics & Communication</option>
+              <option value="Electrical Engineering">Electrical Engineering</option>
+              <option value="Mechanical Engineering">Mechanical Engineering</option>
+              <option value="Civil Engineering">Civil Engineering</option>
+              <option value="Management Studies">Management Studies</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regResidence">Hostel Residence</label>
+            <select id="regResidence" class="form-select">
+              <option value="Hostel Block 1">Hostel Block 1 (Junior Boys)</option>
+              <option value="Hostel Block 2">Hostel Block 2 (Senior Boys)</option>
+              <option value="Hostel Block 3">Hostel Block 3 (Engineering)</option>
+              <option value="Hostel Block D">Hostel Block D (Postgraduate)</option>
+              <option value="Gargi Girls Hostel">Gargi Girls Hostel</option>
+              <option value="Day Scholar">Day Scholar (Off-Campus)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Warden Specific Row -->
+        <div class="form-row" id="rowWardenFields" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" for="regHostelAssigned">Assigned Hostel Complex</label>
+            <select id="regHostelAssigned" class="form-select">
+              <option value="Hostel Block 1 & 2">Hostel Block 1 & 2 (Boys Complex)</option>
+              <option value="Hostel Block 3">Hostel Block 3 (Engineering)</option>
+              <option value="Hostel Block D (PG)">Hostel Block D (PG Hostel)</option>
+              <option value="Gargi Girls Hostel">Gargi & Kalpana Girls Hostels</option>
+              <option value="All Campus Hostels">Chief Warden (All Hostels Oversight)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regWardenOffice">Warden Residence / Office Room</label>
+            <input type="text" id="regWardenOffice" class="form-input" placeholder="e.g. Warden Office, Block 3 Ground Floor" />
+          </div>
+        </div>
+
+        <!-- Dean Specific Row -->
+        <div class="form-row" id="rowDeanFields" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" for="regDeanOffice">Directorate / Office</label>
+            <select id="regDeanOffice" class="form-select">
+              <option value="Dean of Student Welfare">Dean of Student Welfare (DSW)</option>
+              <option value="Chief Proctor Office">Chief Proctor (Disciplinary & Anti-Ragging)</option>
+              <option value="Dean Academic Affairs">Dean Academic Affairs</option>
+              <option value="Director Office">Office of the Director / Ombudsman</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regOfficeCode">Administrative Room Code</label>
+            <input type="text" id="regOfficeCode" class="form-input" placeholder="e.g. Administrative Block, Room 102" />
+          </div>
+        </div>
+
+        <!-- Staff / Caretaker Specific Row -->
+        <div class="form-row" id="rowStaffFields" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" for="regStaffDept">Maintenance Division</label>
+            <select id="regStaffDept" class="form-select">
+              <option value="Estate Office & Plumbing">Estate Office & Plumbing</option>
+              <option value="Electrical & Power Substation">Electrical & Power Substation</option>
+              <option value="Campus Computer Centre / Network">Campus Computer Centre / Network</option>
+              <option value="Central Library Maintenance">Central Library Maintenance</option>
+              <option value="Canteen & Food Safety Cell">Canteen & Food Safety Cell</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regStaffSpec">Designation / Trade</label>
+            <input type="text" id="regStaffSpec" class="form-input" placeholder="e.g. Senior Electrician / System Admin" />
+          </div>
+        </div>
+
+        <!-- Email & Passwords -->
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Official Institutional Email (.edu / .ac.in)</label>
+          <input type="email" id="regEmail" class="form-input" placeholder="name@campus.edu" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="regPass">Create Password</label>
+            <input type="password" id="regPass" class="form-input" placeholder="••••••••••••" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regConfirmPass">Confirm Password</label>
+            <input type="password" id="regConfirmPass" class="form-input" placeholder="••••••••••••" required />
+          </div>
+        </div>
+
+        <div style="margin: 16px 0; font-size: 0.78rem; color: var(--text-secondary); display:flex; align-items:flex-start; gap: 8px;">
+          <input type="checkbox" id="undertakingCheck" required style="margin-top: 3px;" />
+          <label for="undertakingCheck">
+            I certify that the provided credentials belong to the authorized university directory. I understand this portal is protected by UGC Grievance Redressal Regulations.
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: var(--radius-md); padding: 12px;">
+          Complete Registration & Access Portal →
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 0.82rem; color: var(--text-muted);">
+        Already have an active profile? <a href="login.html" style="font-weight: 600;">Sign in here</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+    function switchCategory(cat) {
+      document.getElementById("regCategoryInput").value = cat;
+
+      const cats = ['student', 'warden', 'dean', 'staff'];
+      cats.forEach(c => {
+        const btn = document.getElementById(`btnCat${c.charAt(0).toUpperCase() + c.slice(1)}`);
+        if (btn) {
+          if (c === cat) btn.classList.add("active");
+          else btn.classList.remove("active");
+        }
+      });
+
+      // Show/hide category field rows
+      document.getElementById("rowStudentFields").style.display = cat === 'student' ? 'grid' : 'none';
+      document.getElementById("rowWardenFields").style.display = cat === 'warden' ? 'grid' : 'none';
+      document.getElementById("rowDeanFields").style.display = cat === 'dean' ? 'grid' : 'none';
+      document.getElementById("rowStaffFields").style.display = cat === 'staff' ? 'grid' : 'none';
+
+      // Update identifier label
+      const idLbl = document.getElementById("lblRegId");
+      const idInput = document.getElementById("regIdentifier");
+      if (cat === 'student') {
+        idLbl.textContent = "Institute Roll Number";
+        idInput.placeholder = "e.g. 23CS108";
+      } else if (cat === 'warden') {
+        idLbl.textContent = "Warden Staff Code";
+        idInput.placeholder = "e.g. WRD-4091";
+      } else if (cat === 'dean') {
+        idLbl.textContent = "Directorate Staff ID";
+        idInput.placeholder = "e.g. DIR-0012";
+      } else {
+        idLbl.textContent = "Employee Code";
+        idInput.placeholder = "e.g. EST-8812";
+      }
+    }
+
+    document.getElementById("universalRegisterForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const category = document.getElementById("regCategoryInput").value;
+      const name = document.getElementById("regFullName").value.trim();
+      const identifier = document.getElementById("regIdentifier").value.trim().toUpperCase();
+      const email = document.getElementById("regEmail").value.trim();
+
+      let department = "General";
+      let hostelAssigned = null;
+      let specialization = null;
+
+      if (category === 'student') {
+        department = document.getElementById("regDepartment").value;
+      } else if (category === 'warden') {
+        hostelAssigned = document.getElementById("regHostelAssigned").value;
+        department = "Hostel Administration & Student Welfare";
+      } else if (category === 'dean') {
+        department = document.getElementById("regDeanOffice").value;
+      } else if (category === 'staff') {
+        department = document.getElementById("regStaffDept").value;
+        specialization = document.getElementById("regStaffSpec").value.trim();
+      }
+
+      const payload = {
+        name,
+        email,
+        category,
+        role: category === 'student' ? 'student' : (category === 'staff' ? 'staff' : (category === 'warden' ? 'warden' : 'dean')),
+        rollNumber: category === 'student' ? identifier : null,
+        staffId: category !== 'student' ? identifier : null,
+        department,
+        hostelAssigned,
+        specialization
+      };
+
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const json = await res.json();
+        if (json.success && json.user) {
+          window.CampusResolve.setCurrentUser(json.user);
+          localStorage.setItem("auth_token", "jwt_" + Date.now());
+          localStorage.setItem("role", json.user.role);
+
+          showToast(`Registration Successful! Welcome ${name}.`, "success");
+
+          setTimeout(() => {
+            if (json.user.role === 'student') {
+              window.location.href = "student-dashboard.html";
+            } else {
+              window.location.href = "admin-dashboard.html";
+            }
+          }, 500);
+          return;
+        }
+      } catch (err) {}
+
+      // Fallback
+      const newUser = {
+        id: "usr_" + Date.now(),
+        name,
+        email,
+        category,
+        role: payload.role,
+        department,
+        badge: category === 'dean' ? 'Dean of Student Welfare' : (category === 'warden' ? 'Hostel Warden' : (category === 'staff' ? 'Maintenance Supervisor' : 'Enrolled Student')),
+        avatar: category === 'dean' ? '🏛️' : (category === 'warden' ? '👩‍🏫' : (category === 'staff' ? '🔧' : '👨‍🎓'))
+      };
+
+      window.CampusResolve.setCurrentUser(newUser);
+      localStorage.setItem("auth_token", "jwt_" + Date.now());
+      localStorage.setItem("role", newUser.role);
+
+      showToast(`Welcome ${name}! Profile created successfully.`, "success");
+
+      setTimeout(() => {
+        if (newUser.role === 'student') {
+          window.location.href = "student-dashboard.html";
+        } else {
+          window.location.href = "admin-dashboard.html";
+        }
+      }, 500);
+    });
+  </script>
+</body>
+</html>

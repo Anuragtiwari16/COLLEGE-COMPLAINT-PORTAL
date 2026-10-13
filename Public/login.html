@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Institutional Portal Sign In | CampusResolve Central</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    .auth-container {
+      min-height: calc(100vh - 120px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 16px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 540px;
+      padding: 36px 32px;
+      border-radius: var(--radius-lg);
+    }
+
+    .role-selector-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      background: var(--bg-subtle);
+      padding: 6px;
+      border-radius: var(--radius-md);
+      margin-bottom: 22px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .role-btn {
+      padding: 8px 4px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      transition: all var(--transition-fast);
+      text-align: center;
+    }
+
+    .role-btn.active {
+      background: var(--bg-surface);
+      color: var(--primary-600);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border-subtle);
+    }
+
+    body.dark-mode .role-btn.active {
+      color: var(--primary-300);
+    }
+
+    .anon-banner {
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 18px;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="app-navbar">
+    <a href="index.html" class="brand-wrapper">
+      <div class="brand-mark">CR</div>
+      <div>
+        <div class="brand-title">CampusResolve <span class="brand-badge">Central Portal</span></div>
+      </div>
+    </a>
+
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        🌙 Dark Mode
+      </button>
+      <a href="index.html" class="btn btn-ghost btn-sm">Home</a>
+      <a href="register.html" class="btn btn-secondary btn-sm">Register New User</a>
+    </div>
+  </header>
+
+  <!-- Main Auth Container -->
+  <main class="auth-container">
+    <div class="glass-panel auth-card">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="width: 48px; height: 48px; border-radius: 16px; background: var(--primary-gradient); display: inline-flex; align-items: center; justify-content: center; color: white; font-size: 22px; margin-bottom: 12px; box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);">
+          🏛️
+        </div>
+        <h2 style="font-size: 1.55rem; margin-bottom: 4px;">Institutional Portal Login</h2>
+        <p style="font-size: 0.84rem; color: var(--text-muted);">
+          Select your campus category to sign in to your authorized grievance console
+        </p>
+      </div>
+
+      <!-- Institutional Role Selector Tabs -->
+      <div class="role-selector-bar">
+        <button class="role-btn active" id="btnRoleStudent" onclick="selectRole('student')">
+          <span style="font-size: 1.15rem;">👨‍🎓</span>
+          <span>Student</span>
+        </button>
+        <button class="role-btn" id="btnRoleWarden" onclick="selectRole('warden')">
+          <span style="font-size: 1.15rem;">👩‍🏫</span>
+          <span>Warden</span>
+        </button>
+        <button class="role-btn" id="btnRoleDean" onclick="selectRole('dean')">
+          <span style="font-size: 1.15rem;">🏛️</span>
+          <span>Dean / Director</span>
+        </button>
+        <button class="role-btn" id="btnRoleStaff" onclick="selectRole('staff')">
+          <span style="font-size: 1.15rem;">🔧</span>
+          <span>Caretaker</span>
+        </button>
+      </div>
+
+      <!-- Standard Multi-Category Login Form -->
+      <form id="categoryLoginForm">
+        <input type="hidden" id="selectedCategoryInput" value="student" />
+
+        <div class="form-group">
+          <label class="form-label" id="lblIdentifier">Student Roll No. or Campus Email</label>
+          <input type="text" id="loginEmail" class="form-input" placeholder="e.g. aarav.sharma@campus.edu or 22CS049" required />
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">
+            <label for="loginPassword">Authorized Password</label>
+            <a href="#" style="font-size: 0.74rem;" onclick="prefillSampleCredentials()">Prefill Sample Data</a>
+          </div>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••••••" value="password123" required />
+        </div>
+
+        <div id="authMessage" style="font-size: 0.82rem; margin-bottom: 12px; min-height: 20px; font-weight: 600;"></div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: var(--radius-md); padding: 12px;">
+          Access Official Portal →
+        </button>
+      </form>
+
+      <!-- Quick Category Sample Fillers -->
+      <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <span style="font-size:0.75rem; color:var(--text-muted);">Quick Sample Fill:</span>
+        <div style="display:flex; gap:6px;">
+          <button class="btn btn-secondary btn-sm" onclick="selectRole('student'); prefillSampleCredentials();">Student</button>
+          <button class="btn btn-secondary btn-sm" onclick="selectRole('warden'); prefillSampleCredentials();">Warden</button>
+          <button class="btn btn-secondary btn-sm" onclick="selectRole('dean'); prefillSampleCredentials();">Dean</button>
+          <button class="btn btn-secondary btn-sm" onclick="selectRole('staff'); prefillSampleCredentials();">Caretaker</button>
+        </div>
+      </div>
+
+      <!-- Whistleblower Direct Vault Access Section -->
+      <div style="margin-top: 24px; padding: 16px; border-radius: var(--radius-md); background: var(--bg-subtle); border: 1px dashed var(--border-strong);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
+          <div style="font-weight:700; font-size:0.86rem; color: #0891b2; display:flex; align-items:center; gap:6px;">
+            🕵️ Anonymous Whistleblower Case Tracker
+          </div>
+          <span class="badge" style="background:rgba(6,182,212,0.15); color:var(--accent-cyan);">Zero-Trace</span>
+        </div>
+        <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:10px;">
+          Reporting safety or sensitive issues? You do not need to register or sign in. Enter your secret tracking token:
+        </p>
+
+        <form id="whistleblowerLookupForm" onsubmit="event.preventDefault(); trackWhistleblowerToken();" style="display:flex; gap:8px;">
+          <input type="text" id="whistleblowerTokenInput" class="form-input" placeholder="e.g. ANON-8821-XQ" style="font-family:'JetBrains Mono', monospace; text-transform:uppercase; font-size:0.82rem;" value="ANON-8821-XQ" required />
+          <button type="submit" class="btn btn-secondary btn-sm" style="white-space:nowrap;">Track Case</button>
+        </form>
+      </div>
+
+      <div style="text-align: center; margin-top: 22px; font-size: 0.82rem; color: var(--text-muted);">
+        Don't have an institutional profile? <a href="register.html" style="font-weight: 600;">Register as Student / Faculty / Warden</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/store.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+    const roleConfig = {
+      student: {
+        label: "Student Roll No. or Campus Email",
+        sampleEmail: "aarav.sharma@campus.edu",
+        userKey: "student"
+      },
+      warden: {
+        label: "Warden Staff ID or Official Email",
+        sampleEmail: "sunita.rao@campus.edu",
+        userKey: "warden"
+      },
+      dean: {
+        label: "Directorate / Dean Employee ID or Email",
+        sampleEmail: "dean.sw@campus.edu",
+        userKey: "dean"
+      },
+      staff: {
+        label: "Maintenance Employee Code or Email",
+        sampleEmail: "manoj.estate@campus.edu",
+        userKey: "staff"
+      }
+    };
+
+    function selectRole(role) {
+      document.getElementById("selectedCategoryInput").value = role;
+
+      const roles = ['student', 'warden', 'dean', 'staff'];
+      roles.forEach(r => {
+        const btn = document.getElementById(`btnRole${r.charAt(0).toUpperCase() + r.slice(1)}`);
+        if (btn) {
+          if (r === role) btn.classList.add("active");
+          else btn.classList.remove("active");
+        }
+      });
+
+      const conf = roleConfig[role] || roleConfig.student;
+      document.getElementById("lblIdentifier").textContent = conf.label;
+      document.getElementById("loginEmail").placeholder = conf.sampleEmail;
+    }
+
+    function prefillSampleCredentials() {
+      const activeRole = document.getElementById("selectedCategoryInput").value;
+      const conf = roleConfig[activeRole] || roleConfig.student;
+      document.getElementById("loginEmail").value = conf.sampleEmail;
+      document.getElementById("loginPassword").value = "password123";
+    }
+
+    document.getElementById("categoryLoginForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+      const category = document.getElementById("selectedCategoryInput").value;
+      const msg = document.getElementById("authMessage");
+
+      msg.textContent = "Verifying with Campus Directory LDAP...";
+      msg.style.color = "var(--primary-600)";
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, category })
+        });
+        const json = await res.json();
+
+        if (json.success && json.user) {
+          window.CampusResolve.setCurrentUser(json.user);
+          localStorage.setItem("auth_token", json.token);
+          localStorage.setItem("role", json.user.role);
+
+          msg.textContent = `Welcome ${json.user.name}! Redirecting to portal...`;
+          msg.style.color = "var(--accent-emerald)";
+
+          setTimeout(() => {
+            if (json.user.role === "student") {
+              window.location.href = "student-dashboard.html";
+            } else {
+              window.location.href = "admin-dashboard.html";
+            }
+          }, 450);
+          return;
+        }
+      } catch (err) {}
+
+      // Fallback: In-memory/store user
+      const user = window.INSTITUTIONAL_USERS[category] || window.INSTITUTIONAL_USERS.student;
+      window.CampusResolve.setCurrentUser(user);
+      localStorage.setItem("auth_token", "jwt_" + Date.now());
+      localStorage.setItem("role", user.role);
+
+      msg.textContent = `Welcome ${user.name}! Redirecting...`;
+      msg.style.color = "var(--accent-emerald)";
+
+      setTimeout(() => {
+        if (user.role === "student") {
+          window.location.href = "student-dashboard.html";
+        } else {
+          window.location.href = "admin-dashboard.html";
+        }
+      }, 450);
+    });
+
+    function trackWhistleblowerToken() {
+      const token = document.getElementById("whistleblowerTokenInput").value.trim().toUpperCase();
+      const g = window.CampusResolve.getGrievanceById(token);
+
+      if (g) {
+        window.location.href = `student-dashboard.html?track=${token}`;
+      } else {
+        alert(`Token "${token}" not found in institutional grievance records.`);
+      }
+    }
+  </script>
+</body>
+</html>
